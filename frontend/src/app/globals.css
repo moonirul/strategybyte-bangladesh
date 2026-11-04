@@ -1,0 +1,115 @@
+@import "tailwindcss";
+
+/*
+ * ByteVoice design tokens.
+ * Palette: deep navy surfaces, off-white text, teal primary, restrained blue accent.
+ * Tokens are exposed to Tailwind via @theme so classes like bg-surface / text-ink-muted work.
+ */
+:root {
+  --navy-950: #050c18;
+  --navy-900: #081324;
+  --navy-850: #0b1a2f;
+  --navy-800: #10223b;
+  --navy-700: #1a3050;
+  --line: #1d3352;
+  --line-strong: #2a4469;
+
+  --ink: #f3f0e8; /* off-white */
+  --ink-muted: #a3b0c2;
+  --ink-subtle: #6f7f96;
+
+  --teal-300: #7ee8d9;
+  --teal-400: #3fd4c0;
+  --teal-500: #14b8a6;
+  --teal-600: #0e9488;
+  --blue-400: #6ea8fe;
+
+  --amber-400: #f5c26b;
+  --rose-400: #fb7185;
+}
+
+@theme inline {
+  --color-canvas: var(--navy-950);
+  --color-surface: var(--navy-900);
+  --color-surface-raised: var(--navy-850);
+  --color-surface-hover: var(--navy-800);
+  --color-surface-strong: var(--navy-700);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-subtle: var(--ink-subtle);
+  --color-primary: var(--teal-500);
+  --color-primary-hover: var(--teal-400);
+  --color-primary-soft: var(--teal-300);
+  --color-primary-strong: var(--teal-600);
+  --color-accent: var(--blue-400);
+  --color-warning: var(--amber-400);
+  --color-danger: var(--rose-400);
+
+  /* Latin glyphs from Geist; Bengali glyphs fall through to Hind Siliguri. */
+  --font-sans: var(--font-geist-sans), var(--font-bangla), "Noto Sans Bengali", system-ui, sans-serif;
+  --font-bangla: var(--font-hind-siliguri), "Noto Sans Bengali", system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --radius-card: 1.25rem;
+  --radius-control: 0.75rem;
+
+  --shadow-card: 0 1px 0 0 rgb(255 255 255 / 0.04) inset, 0 20px 40px -24px rgb(0 0 0 / 0.6);
+  --shadow-glow: 0 0 0 1px rgb(20 184 166 / 0.35), 0 12px 40px -12px rgb(20 184 166 / 0.45);
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 600ms;
+
+  --animate-ring: ring-out 2.4s var(--ease-out-soft) infinite;
+  --animate-fade-up: fade-up var(--duration-slow) var(--ease-out-soft) both;
+
+  @keyframes ring-out {
+    0% { transform: scale(0.85); opacity: 0.55; }
+    100% { transform: scale(1.5); opacity: 0; }
+  }
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: none; }
+  }
+}
+
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--navy-950);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgb(20 184 166 / 0.35);
+}
+
+:focus-visible {
+  outline: 2px solid var(--teal-400);
+  outline-offset: 2px;
+}
+
+/* Decorative grid used in hero / auth backgrounds. */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgb(243 240 232 / 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(243 240 232 / 0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
